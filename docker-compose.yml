@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  sycchile-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: sycchile_3000_core
+    restart: always
+    ports:
+      - "80:80"
+    environment:
+      - SYSTEM_NAME=#SYCHILE 3.000
+      - GOVERNANCE_LEAD=JORGE ALMENDARES AROS
+      - ENGINE_KALLPA=FIFO_STRICT
+      - AUDITOR_AURA=EQUITY_AND_TRACEABILITY
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 256M
+        reservations:
+          cpus: '0.10'
+          memory: 64M
+    networks:
+      - sycchile_network
+
+networks:
+  sycchile_network:
+    name: sycchile_net
+    driver: bridge
