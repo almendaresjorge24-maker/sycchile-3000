@@ -1,4 +1,4 @@
-version: '3.8'
+name: sycchile3000
 
 services:
   sycchile-app:
@@ -6,14 +6,22 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: sycchile_3000_core
-    restart: always
+    restart: unless-stopped
     ports:
-      - "80:80"
+      # Solo visible desde este computador. Para abrirlo a la red, cambia a "8080:8080"
+      - "127.0.0.1:8080:8080"
     environment:
-      - SYSTEM_NAME=#SYCHILE 3.000
+      - SYSTEM_NAME=SYCCHILE 3.000
       - GOVERNANCE_LEAD=JORGE ALMENDARES AROS
       - ENGINE_KALLPA=FIFO_STRICT
       - AUDITOR_AURA=EQUITY_AND_TRACEABILITY
+    read_only: true
+    tmpfs:
+      - /tmp
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
     deploy:
       resources:
         limits:
@@ -22,6 +30,27 @@ services:
         reservations:
           cpus: '0.10'
           memory: 64M
+    networks:
+      - sycchile_network
+
+  # Agentes KALLPA y AURA: servicio interno, sin puerto publicado (solo Nginx puede hablarle)
+  agentes:
+    build: ./agentes
+    container_name: sycchile_agentes
+    restart: unless-stopped
+    env_file:
+      - path: .env
+        required: false
+    read_only: true
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 128M
     networks:
       - sycchile_network
 

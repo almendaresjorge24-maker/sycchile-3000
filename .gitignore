@@ -1,4 +1,24 @@
+# Secretos y claves
 .env
+.env.*
+*.pem
+*.key
+*.pfx
+
+# Registros y temporales
 *.log
+*.bak
+*.tmp
+~$*
+
+# Dependencias
 node_modules/
+
+# Sistema operativo / OneDrive
 .DS_Store
+Thumbs.db
+desktop.ini
+
+# Respaldos comprimidos
+*.zip
+*.rar

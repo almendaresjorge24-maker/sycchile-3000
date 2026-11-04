@@ -1,0 +1,9 @@
+SYCCHILE 3.000 - Banco Solidario de Alimentos
+Copyright (c) 2026 Jorge Almendares Aros. Todos los derechos reservados.
+
+Este software, su código, diseño, textos y arquitectura (incluidos los
+componentes Kallpa y Aura) son obra de Jorge Almendares Aros.
+
+Queda prohibida, sin autorización previa y por escrito del titular, la copia,
+modificación, distribución, publicación, sublicencia o uso comercial total o
+parcial de esta obra.

@@ -4,22 +4,25 @@
 # Agentes: KALLPA ⇄ AURA
 # ==========================================
 
-FROM nginx:1.25-alpine
+# Nginx que corre SIN permisos de administrador dentro del contenedor
+FROM nginxinc/nginx-unprivileged:stable-alpine
 
-# Eliminar configuración por defecto de Nginx
-RUN rm /etc/nginx/conf.d/default.conf
+LABEL org.opencontainers.image.title="SYCCHILE 3.000 - Banco Solidario de Alimentos" \
+      org.opencontainers.image.authors="Jorge Almendares Aros" \
+      org.opencontainers.image.licenses="All rights reserved" \
+      org.opencontainers.image.description="Gobernanza humana + trazabilidad FIFO (Kallpa / Aura)"
 
-# Copiar la configuración personalizada de Nginx
+# Configuración propia de Nginx (reemplaza la que trae por defecto)
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-# Copiar la aplicación web optimizada
-COPY index_v2.html /usr/share/nginx/html/index.html
+# La aplicación web (renombra tu HTML final a index.html)
+COPY index.html /usr/share/nginx/html/index.html
 
-# Exponer el puerto de servicio HTTP
-EXPOSE 80
+# Puerto interno (el usuario sin privilegios no puede usar el 80)
+EXPOSE 8080
 
-# Healthcheck para verificar el estado de la aplicación
+# Verifica que la aplicación responda (127.0.0.1 evita fallos con IPv6)
 HEALTHCHECK --interval=30s --timeout=5s --start-period=5s --retries=3 \
-  CMD wget --quiet --tries=1 --spider http://localhost/ || exit 1
+  CMD wget --quiet --tries=1 --spider http://127.0.0.1:8080/ || exit 1
 
 CMD ["nginx", "-g", "daemon off;"]

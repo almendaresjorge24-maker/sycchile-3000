@@ -1,0 +1,1 @@
+{"name":"sycchile-3000","version":"1.0.0","private":true,"scripts":{"test":"node --test"},"devDependencies":{"jsdom":"^30.1.3"}}

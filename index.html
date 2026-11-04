@@ -1,0 +1,1270 @@
+<!DOCTYPE html>
+<!-- saved from url=(0073)file:///C:/Users/almen/OneDrive/Escritorio/SYCCHILE%203.000/index_v2.html -->
+<html lang="es"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' https://fonts.googleapis.com;">
+    <title>SYCCHILE 3.000 - Banco Solidario de Alimentos</title>
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --card-bg: #1e293b;
+            --accent-blue: #38bdf8;
+            --accent-green: #22c55e;
+            --accent-orange: #f97316;
+            --accent-red: #ef4444;
+            --accent-purple: #a855f7;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: #334155;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            padding: 24px;
+            line-height: 1.5;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        main { flex: 1; }
+
+        header {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        h1 { font-size: 1.8rem; font-weight: 800; color: var(--accent-blue); }
+        .subtitle { font-size: 0.9rem; color: var(--text-muted); margin-top: 4px; }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid var(--accent-green);
+            color: var(--accent-green);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .governance-tag {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            border-left: 2px solid var(--accent-purple);
+            padding-left: 8px;
+        }
+
+        /* Bloque Superior de Especificaciones (Spec) */
+        .spec-top-panel {
+            background: rgba(56, 189, 248, 0.05);
+            border: 1px solid var(--accent-blue);
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin-bottom: 24px;
+        }
+
+        .aura-card {
+            background: rgba(168, 85, 247, 0.08);
+            border: 1px solid var(--accent-purple);
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin-bottom: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .lang-selector {
+            background: var(--card-bg);
+            border: 1px solid var(--accent-purple);
+            color: var(--text-main);
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .btn-voice {
+            background: var(--accent-purple);
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+        .btn-voice:hover { opacity: 0.9; }
+
+        .agents-panel {
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.1), rgba(30, 41, 59, 0.9));
+            border: 1px solid var(--accent-purple);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 24px;
+        }
+
+        .agent-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 16px;
+            margin-top: 12px;
+        }
+
+        .agent-box {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 14px;
+        }
+
+        .supervision-box {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 16px;
+            padding-top: 12px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .btn-approve {
+            background: var(--accent-green);
+            color: var(--bg-dark);
+            border: none;
+            padding: 10px 18px;
+            border-radius: 6px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .kpi-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .kpi-title { font-size: 0.85rem; color: var(--text-muted); font-weight: 600; }
+        .kpi-value { font-size: 1.8rem; font-weight: 800; margin: 8px 0; color: var(--accent-blue); }
+        .kpi-formula { font-size: 0.75rem; color: var(--text-muted); background: #0f172a; padding: 6px; border-radius: 4px; margin-top: 8px; }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: var(--border-color);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 8px;
+        }
+        .progress-fill { height: 100%; background: var(--accent-green); width: 78%; transition: width 0.3s; }
+
+        .action-bar {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+
+        .btn-action {
+            background: var(--card-bg);
+            border: 1px solid var(--accent-blue);
+            color: var(--accent-blue);
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .btn-action:hover { background: var(--accent-blue); color: var(--bg-dark); }
+        .btn-action.despacho { border-color: var(--accent-orange); color: var(--accent-orange); }
+        .btn-action.despacho:hover { background: var(--accent-orange); color: var(--bg-dark); }
+        .btn-action.prioridad { border-color: var(--accent-red); color: var(--accent-red); }
+        .btn-action.prioridad:hover { background: var(--accent-red); color: var(--bg-dark); }
+        .btn-action.slack { border-color: var(--accent-purple); color: var(--accent-purple); }
+        .btn-action.slack:hover { background: var(--accent-purple); color: white; }
+        .btn-action.beneficiario { border-color: var(--accent-green); color: var(--accent-green); }
+        .btn-action.beneficiario:hover { background: var(--accent-green); color: var(--bg-dark); }
+
+        .section-title { font-size: 1.2rem; font-weight: 700; margin: 24px 0 16px 0; color: var(--text-main); }
+        
+        .table-container {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow-x: auto;
+            margin-bottom: 24px;
+        }
+
+        table { width: 100%; border-collapse: collapse; text-align: left; font-size: 0.9rem; }
+        th, td { padding: 12px 16px; border-bottom: 1px solid var(--border-color); }
+        th { background-color: rgba(255, 255, 255, 0.03); color: var(--text-muted); }
+
+        .priority-high { color: var(--accent-red); font-weight: 700; }
+        .priority-med { color: var(--accent-orange); font-weight: 600; }
+        .priority-normal { color: var(--accent-green); font-weight: 600; }
+
+        .grid-two {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .panel-box {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .code-block {
+            background: #0f172a;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 12px;
+            font-family: monospace;
+            font-size: 0.78rem;
+            color: var(--accent-blue);
+            margin-top: 8px;
+            white-space: pre-wrap;
+        }
+
+        footer {
+            margin-top: 40px;
+            padding-top: 16px;
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+    </style>
+</head>
+<body>
+
+    <main>
+        <header>
+            <div>
+                <h1 id="txtRazonSocial">SYCCHILE 3.000</h1>
+                <div class="subtitle" id="txtSub">Banco Solidario de Alimentos — Sistema Integrado de Gestión Logística e Inteligencia Operativa</div>
+            </div>
+            <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 6px;">
+                <div class="status-badge" id="statusBadge">● Verificando conexión…</div>
+                <div class="governance-tag">Gobernanza Humana: JORGE ALMENDARES AROS</div>
+            </div>
+        </header>
+
+        <div id="avisoDemo" role="note" style="border: 1px solid var(--accent-orange); background: rgba(249, 115, 22, 0.1); color: var(--text-main); border-radius: 8px; padding: 10px 14px; margin-bottom: 12px; font-size: 0.85rem;"></div>
+
+        <!-- Prompts Base y Especificación del Sistema (Spec) Ubicados Arriba -->
+        <div class="spec-top-panel">
+            <h3 style="font-size: 0.95rem; color: var(--accent-blue); margin-bottom: 6px;">📋 Prompts Base y Especificación del Sistema (Spec)</h3>
+            <div class="code-block" style="margin-top: 0;">
+[PROMPT DEL SISTEMA - KALLPA &amp; AURA / SYCCHILE 3.000]
+- Misión del Sistema: Desarrollar un Sistema Integrado de Gestión Logística e Inteligencia Operativa para la Fundación Banco Solidario de Alimentos.
+- Gobernanza y Validación: Jorge Almendares Aros (Validation Lead / Human-in-the-Loop).
+- Arquitectura de Doble Agente: Agente KALLPA procesa el motor logístico FIFO y Agente AURA audita la equidad de distribución final y trazabilidad multidireccional antes de la aprobación humana.
+- Accesibilidad Inclusiva: Interfaz simplificada y accesible, adaptada para voluntarios mayores de 60 años sin formación técnica previa.
+- Slack Tecnológico &amp; Ciberseguridad: Tolerancia a fallas con buffer offline (LocalStorage) y cabeceras de seguridad CSP estrictas.
+- Cobertura Multilingüe: Soporte activo en Español, Kreyòl Ayisyen, Mapudungun, Inglés, Francés y Portugués.
+- Regla Fonética de Voz: Pronunciar oficialmente "SICCHILE 3.000".
+            </div>
+            <details id="sddDetalle" style="margin-top: 10px;">
+                <summary id="txtSddTitulo" style="cursor: pointer; padding: 6px 0; color: var(--accent-green); font-weight: 600; font-size: 0.9rem;"></summary>
+                <div style="font-size: 0.85rem; color: var(--text-main); margin-top: 8px; line-height: 1.5;">
+                    <p id="txtSddMetodo" style="white-space: pre-line;"></p>
+                    <p id="txtSddProblema" style="margin-top: 8px;"></p>
+                    <p id="txtSddSolucion" style="margin-top: 8px;"></p>
+                    <p id="txtSddCriterios" style="white-space: pre-line; margin-top: 8px;"></p>
+                    <p id="txtSddPrincipio" style="margin-top: 8px; color: var(--text-muted);"></p>
+                </div>
+            </details>
+        </div>
+
+        <div class="aura-card">
+            <div>
+                <strong id="txtAuraTitle">Asistencia Multimodal AURA &amp; KALLPA</strong>
+                <div style="font-size: 0.8rem; color: var(--text-muted);" id="txtAuraSub">Soporte multilingüe activo (Kreyòl Ayisyen, Mapudungun, Español, Inglés, Francés, Portugués)</div>
+            </div>
+            <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+                <select id="idiomaSelect" class="lang-selector" onchange="cambiarIdioma()">
+                    <option value="es">🇪🇸 Español</option>
+                    <option value="ht">🇭🇹 Kreyòl Ayisyen</option>
+                    <option value="map">🇨🇱 Mapudungun</option>
+                    <option value="en">🇬🇧 English</option>
+                    <option value="fr">🇫🇷 Français</option>
+                    <option value="pt">🇧🇷 Português</option>
+                </select>
+                <button class="btn-voice" onclick="speakAuraInstruction()">🔊 <span id="txtBtnVoice">Escuchar Estado</span></button>
+            </div>
+        </div>
+
+        <!-- Mando Operativo: Validación Cruzada e Identidad de Agentes -->
+        <div class="agents-panel">
+            <h3 style="color: var(--accent-purple); font-size: 1rem; margin-bottom: 4px;" id="txtPanelAgentes">🤖 Panel de Validación Cruzada: Agentes KALLPA ⇄ AURA</h3>
+            <p style="font-size: 0.85rem; color: var(--text-muted);" id="txtPanelAgentesSub">Control FIFO anti-merma, equidad social y trazabilidad multidireccional.</p>
+            
+            <div class="agent-grid">
+                <div class="agent-box">
+                    <strong style="color: var(--accent-blue); font-size: 0.85rem;" id="txtKallpaTitle">⚡ KALLPA (Motor Operativo / Fuerza FIFO):</strong>
+                    <p id="kallpaStatus" style="font-size: 0.8rem; color: var(--text-main); margin-top: 4px;">Estado KALLPA: Trazabilidad activada (Hacia atrás y Hacia adelante) garantizando rotación estricta del lote #LOT-8842.</p>
+                    <p id="kallpaIA" style="font-size: 0.8rem; color: var(--accent-blue); margin-top: 6px;"></p>
+                </div>
+                <div class="agent-box">
+                    <strong style="color: var(--accent-purple); font-size: 0.85rem;" id="txtAuraTitleBox">🛡️ AURA (Auditoría y Trazabilidad Lateral):</strong>
+                    <p id="auraAuditStatus" style="font-size: 0.8rem; color: var(--text-main); margin-top: 4px;">Estado AURA: Trazabilidad izquierda (condiciones de bodega) y derecha (impacto social y equidad familiar) auditadas con éxito.</p>
+                    <p id="auraIA" style="font-size: 0.8rem; color: var(--accent-purple); margin-top: 6px;"></p>
+                </div>
+            </div>
+
+            <div class="agent-box" id="mesaAgentes" style="margin-top: 10px;">
+                <div id="mesaLog" role="log" aria-live="polite" style="font-size: 0.8rem; max-height: 150px; overflow-y: auto; color: var(--text-main);"></div>
+                <div style="display: flex; gap: 6px; margin-top: 8px; flex-wrap: wrap;">
+                    <select id="agenteDestino" aria-label="Agente" style="background: var(--bg-dark); color: var(--text-main); border: 1px solid var(--border-color); border-radius: 6px; padding: 6px;">
+                        <option value="kallpa">KALLPA</option>
+                        <option value="aura">AURA</option>
+                    </select>
+                    <input id="preguntaAgente" type="text" maxlength="200" autocomplete="off" placeholder="Pregunta a un agente (no escribas nombres ni RUT de familias)" onkeydown="if (event.key === 'Enter') { preguntarAgente(); }" style="flex: 1; min-width: 180px; background: var(--bg-dark); color: var(--text-main); border: 1px solid var(--border-color); border-radius: 6px; padding: 6px 8px;">
+                    <button class="btn-action" id="btnPreguntar" onclick="preguntarAgente()">Preguntar</button>
+                </div>
+            </div>
+
+            <div class="supervision-box">
+                <span id="estadoSupervision" style="font-weight: 600; color: var(--accent-orange);">⚠️ Validación Humana Pendiente: Operación sujeta a revisión final.</span>
+                <button class="btn-approve" id="btnGovApprove" onclick="autorizarSupervision()">✓ Aprobar como Validation Lead</button>
+            </div>
+        </div>
+
+        <h2 class="section-title" id="txtSecKpi">Matriz de KPIs &amp; Cumplimiento Operativo</h2>
+        <div class="kpi-grid">
+            <div class="kpi-card">
+                <div class="kpi-title" id="txtKpi1">Capacidad de Bodega (Existencias)</div>
+                <div class="kpi-value" id="valCapacidad">78%</div>
+                <div class="progress-bar"><div class="progress-fill" id="barraCapacidad" style="width: 78%;"></div></div>
+                <div class="kpi-formula">Fórmula: (Kg Ocupados / Kg Totales) * 100<br><strong>Meta:</strong> &lt; 85%</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-title" id="txtKpi2">Días Promedio en Bodega (FIFO)</div>
+                <div class="kpi-value" id="valDiasBodega" style="color: var(--accent-green);">3.5 Días</div>
+                <div class="kpi-formula">Fórmula: Σ(Días Almacenamiento) / Total Lotes</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-title" id="txtKpi3">Equidad de Entregas (Cero Desigualdad)</div>
+                <div class="kpi-value" id="valCumplimiento">100% Sin Duplicados</div>
+                <div class="kpi-formula">Fórmula: (Familias Únicas / Total Repartos) * 100</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-title" id="txtKpi4">Índice de Prevención de Merma</div>
+                <div class="kpi-value" style="color: var(--accent-green);">0.00%</div>
+                <div class="kpi-formula">Fórmula: (Kg Vencidos / Kg Recibidos) * 100</div>
+            </div>
+        </div>
+
+        <!-- Control Logístico Interactivo -->
+        <h2 class="section-title" id="txtSecControl">Control de Existencias, Ingresos y Despachos Justos</h2>
+        <div class="action-bar">
+            <button class="btn-action" onclick="registrarIngresoInteractive()" id="btnIngreso">➕ Registrar Nueva Donación</button>
+            <button class="btn-action despacho" onclick="procesarDespachoInteractive()" id="btnDespacho">📦 Procesar Despacho FIFO</button>
+            <button class="btn-action beneficiario" onclick="verificarBeneficiario()" id="txtBtnBeneficiario">🔍 Validar Familia / Beneficiario (Distribución Final)</button>
+            <button class="btn-action" onclick="cerrarCiclo()" id="btnCerrarCiclo">🔒 Cerrar Ciclo de Distribución</button>
+            <button class="btn-action prioridad" onclick="alternarPrioridadInteractive()" id="btnPrioridad">⚡ Alerta Vencimiento Crítico</button>
+            <button class="btn-action slack" onclick="simularSlackTecnologico()" id="btnSlack">📡 Conmutar Slack Tecnológico (Offline/Cloud)</button>
+        </div>
+
+        <div class="table-container">
+            <table id="tablaInventario">
+                <thead>
+                    <tr>
+                        <th id="thLote">Lote ID</th>
+                        <th id="thAlimento">Alimento / Categoría</th>
+                        <th id="thEntradas">Entradas (kg)</th>
+                        <th id="thSalidas">Salidas (kg)</th>
+                        <th id="thStock">Stock Actual (kg)</th>
+                        <th id="thRotacion">% Rotación FIFO</th>
+                        <th id="thPri">Prioridad de Vencimiento</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr id="fila-1">
+                        <td>#LOT-8842</td>
+                        <td>Leche Entera en Polvo (Crítico)</td>
+                        <td>1,500 kg</td>
+                        <td>300 kg</td>
+                        <td class="stock-val">1,200 kg</td>
+                        <td class="rotacion-val">80%</td>
+                        <td><span class="priority-high">⚠️ Vence en 3 días (Salida Inmediata Obligatoria)</span></td>
+                    </tr>
+                    <tr id="fila-0">
+                        <td>#LOT-8841</td>
+                        <td>Harina de Trigo Fortificada</td>
+                        <td>3,000 kg</td>
+                        <td>500 kg</td>
+                        <td class="stock-val">2,500 kg</td>
+                        <td class="rotacion-val">83%</td>
+                        <td><span class="priority-med">Media (15 días)</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Matriz de Trazabilidad Multidireccional -->
+        <h2 class="section-title">🌐 Matriz de Trazabilidad Multidireccional (Adelante, Atrás, Izquierda, Derecha)</h2>
+        <div class="grid-two">
+            <div class="panel-box">
+                <h3 style="font-size: 1rem; color: var(--accent-blue); margin-bottom: 8px;">Trazabilidad Longitudinal (Eje Operativo)</h3>
+                <ul style="font-size: 0.85rem; padding-left: 18px; color: var(--text-main); line-height: 1.6;">
+                    <li><strong>Trazabilidad Hacia Atrás (Backward):</strong> Registro de proveedores, origen de donaciones, fechas de cosecha/producción y lotes de fábrica originales.</li>
+                    <li><strong>Trazabilidad Hacia Adelante (Forward):</strong> Seguimiento en tiempo real de la ruta del lote desde la bodega hasta el punto exacto de entrega a la comunidad.</li>
+                </ul>
+            </div>
+            <div class="panel-box">
+                <h3 style="font-size: 1rem; color: var(--accent-purple); margin-bottom: 8px;">Trazabilidad Lateral (Eje Contextual e Impacto)</h3>
+                <ul style="font-size: 0.85rem; padding-left: 18px; color: var(--text-main); line-height: 1.6;">
+                    <li><strong>Trazabilidad a la Izquierda (Contexto y Bodega):</strong> Auditoría de manipulación, control de temperatura, humedad, pallets y voluntarios responsables de la custodia.</li>
+                    <li><strong>Trazabilidad a la Derecha (Impacto Social y Equidad):</strong> Auditoría del padrón familiar, verificación de cero duplicidades y medición de satisfacción comunitaria.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Padrón en Vivo de Distribución Final (Familias Atendidas) -->
+        <h2 class="section-title"><span id="txtSecPadron">📋 Padrón en Vivo de Distribución Final (Familias y Beneficiarios Registrados)</span> · <span id="txtCiclo">Ciclo</span> <span id="cicloActivo">1</span></h2>
+        <div class="table-container">
+            <table id="tablaBeneficiarios">
+                <thead>
+                    <tr>
+                        <th>Representante / Familia (RUT o Nombre)</th>
+                        <th>Estado de Entrega</th>
+                        <th>Fecha y Hora de Registro</th>
+                        <th>Acción de Auditoría (AURA)</th>
+                    </tr>
+                </thead>
+                <tbody id="listaBeneficiariosBody">
+                    <tr>
+                        <td>Juan Pérez (Ejemplo Inicial)</td>
+                        <td><span style="color: var(--accent-green); font-weight: 600;">✓ Entregado con Éxito</span></td>
+                        <td>02/11/2026 - 08:30 hrs</td>
+                        <td><span style="color: var(--text-muted);">Verificado sin duplicidad</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Matriz OKR & Arquitectura de Slack Tecnológico -->
+        <h2 class="section-title">Matriz OKR Alineada con KPIs &amp; Arquitectura de Slack Tecnológico</h2>
+        <div class="grid-two">
+            <div class="panel-box">
+                <h3 style="font-size: 1rem; color: var(--accent-purple); margin-bottom: 8px;">Objetivos y Resultados Clave (OKR)</h3>
+                <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 8px;"><strong>Propósito:</strong> Cero mermas críticas y distribución equitativa operada por voluntarios sin experiencia técnica.</p>
+                <ul style="font-size: 0.85rem; padding-left: 18px; color: var(--text-main);">
+                    <li><strong>KR1 (Alineado a KPI Días en Bodega):</strong> Reducir días promedio en bodega a &lt; 4 días mediante rotación FIFO estricta.</li>
+                    <li><strong>KR2 (Alineado a KPI Cumplimiento):</strong> Mantener cumplimiento prioritario &gt; 95% ante riesgo de vencimiento.</li>
+                    <li><strong>KR3 (Alineado a KPI Equidad):</strong> Garantizar 100% de equidad en distribución final sin duplicidades ni familias desatendidas.</li>
+                </ul>
+            </div>
+            <div class="panel-box">
+                <h3 style="font-size: 1rem; color: var(--accent-blue); margin-bottom: 8px;">Slack Tecnológico &amp; Ciberseguridad</h3>
+                <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 8px;">Buffer operativo perimetral para absorción de fallas locales y alta disponibilidad.</p>
+                <div style="font-size: 0.85rem; color: var(--text-main);">
+                    • <strong>Buffer Modo Offline:</strong> Sincronización diferida mediante LocalStorage.<br>
+                    • <strong>Holgura de Cómputo:</strong> Ejecución cliente en JS ligero.<br>
+                    • <strong>Cabeceras CSP Estrictas:</strong> Aislamiento contra inyecciones zero-day.
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        SYCCHILE 3.000 - JORGE ALMENDARES AROS © 2026 | Kallpa / AURA
+    </footer>
+
+    <script>
+        const traducciones = {
+            es: {
+                sub: "Banco Solidario de Alimentos — Sistema Integrado de Gestión Logística e Inteligencia Operativa",
+                secKpi: "Matriz de KPIs & Cumplimiento Operativo",
+                secControl: "Control de Existencias, Ingresos y Despachos Justos",
+                btnIngr: "➕ Registrar Nueva Donación",
+                btnDesp: "📦 Procesar Despacho FIFO",
+                btnPrio: "⚡ Alerta Vencimiento Crítico",
+                btnSlck: "📡 Conmutar Slack Tecnológico (Offline/Cloud)",
+                thL: "Lote ID", thA: "Alimento / Categoría", thE: "Entradas (kg)", thS: "Salidas (kg)", thSt: "Stock Actual (kg)", thR: "% Rotación FIFO", thP: "Prioridad de Vencimiento",
+                btnVoice: "Escuchar Estado",
+                txtBtnBeneficiario: "🔍 Validar Familia / Beneficiario (Distribución Final)",
+                speechText: "Sistema Integrado de Gestión Logística SIC CHILE tres mil. Control FIFO activo y trazabilidad multidireccional garantizada por Jorge Almendares Aros."
+            },
+            ht: {
+                sub: "Bank Manje Solidarite — Sistèm Entegre Logistik ak Entèlijans Operasyonèl",
+                secKpi: "Matris KPIs & Konfòmite Operasyonèl",
+                secControl: "Kontwòl Stock ak Distribisyon Just",
+                btnIngr: "➕ Anrejistre Nouvo Don",
+                btnDesp: "📦 Trete Livrezon FIFO",
+                btnPrio: "⚡ Alèt Dat Limit",
+                btnSlck: "📡 Chanje Slack Teknoloji (Offline/Cloud)",
+                thL: "Lòt ID", thA: "Manje / Kategori", thE: "Antre (kg)", thS: "Sòti (kg)", thSt: "Stock Aktyèl (kg)", thR: "% Wotasyon FIFO", thP: "Priyorite Dat Limit",
+                btnVoice: "Koute Eta a",
+                txtBtnBeneficiario: "🔍 Konfime Fanmi (Distribisyon Final)",
+                speechText: "Sistèm Entegre Jestyon Logistik SIC CHILE twa mil. Kontwòl FIFO aktif ak desizyon jis."
+            },
+            en: {
+                sub: "Solidarity Food Bank — Integrated Logistics Management and Operational Intelligence System",
+                secKpi: "KPIs Matrix & Operational Compliance",
+                secControl: "Inventory Control, Inflows & Fair Dispatches",
+                btnIngr: "➕ Register New Donation",
+                btnDesp: "📦 Process FIFO Dispatch",
+                btnPrio: "⚡ Critical Expiration Alert",
+                btnSlck: "📡 Toggle Tech Slack (Offline/Cloud)",
+                thL: "Batch ID", thA: "Food / Category", thE: "Inflows (kg)", thS: "Outflows (kg)", thSt: "Current Stock (kg)", thR: "FIFO Turnover %", thP: "Expiration Priority",
+                btnVoice: "Listen Status",
+                txtBtnBeneficiario: "🔍 Validate Beneficiary Family (Final Distribution)",
+                speechText: "Integrated Logistics Management System SIC CHILE three thousand. FIFO active and multidirectional traceability verified by Jorge Almendares Aros."
+            },
+            fr: {
+                sub: "Banque Alimentaire Solidaire — Système Intégré de Gestion Logistique et d'Intelligence Opérationnelle",
+                secKpi: "Matrice des KPIs & Conformité Opérationnelle",
+                secControl: "Contrôle des Stocks, Entrées et Expéditions",
+                btnIngr: "➕ Enregistrer un Nouveau Don",
+                btnDesp: "📦 Traiter l'Expédition FIFO",
+                btnPrio: "⚡ Alerte Expiration Critique",
+                btnSlck: "📡 Basculer Slack Tech (Offline/Cloud)",
+                thL: "Lot ID", thA: "Aliment / Catégorie", thE: "Entrées (kg)", thS: "Sorties (kg)", thSt: "Stock Actuel (kg)", thR: "% Rotation FIFO", thP: "Priorité Expiration",
+                btnVoice: "Écouter l'État",
+                txtBtnBeneficiario: "🔍 Valider la Famille (Distribution Finale)",
+                speechText: "Système Intégré de Gestion Logistique SIC CHILE trois mille. Contrôle FIFO actif."
+            },
+            pt: {
+                sub: "Banco Solidário de Alimentos — Sistema Integrado de Gestão Logística e Inteligência Operacional",
+                secKpi: "Matriz de KPIs & Conformidade Operacional",
+                secControl: "Controle de Estoque, Entradas e Despachos",
+                btnIngr: "➕ Registrar Nova Doação",
+                btnDesp: "📦 Processar Despacho FIFO",
+                btnPrio: "⚡ Alerta Vencimento Crítico",
+                btnSlck: "📡 Alternar Slack Tecnológico (Offline/Cloud)",
+                thL: "Lote ID", thA: "Alimento / Categoria", thE: "Entradas (kg)", thS: "Saídas (kg)", thSt: "Estoque Atual (kg)", thR: "% Rotação FIFO", thP: "Prioridade Vencimento",
+                btnVoice: "Ouvir Estado",
+                txtBtnBeneficiario: "🔍 Validar Família / Beneficiário (Distribución Final)",
+                speechText: "Sistema Integrado de Gestão Logística SIC CHILE três mil. Controle FIFO ativo e justa distribuição."
+            }
+        };
+
+        // ===== Idiomas: textos nuevos y correcciones (spec 002) =====
+        const textosNuevos = {
+            es: {
+                btnSlck: "📡 Conmutar Slack Tecnológico (Sin conexión/Nube)",
+                btnCerrar: "🔒 Cerrar Ciclo de Distribución",
+                secPadron: "📋 Padrón en Vivo de Distribución Final (Familias y Beneficiarios Registrados)",
+                ciclo: "Ciclo",
+                promptId: "Ingrese RUT o Nombre del Representante de la Familia (Distribución Final):",
+                rutInvalido: "RUT inválido: revisa el dígito verificador.",
+                idInvalida: "Ingresa un RUT válido o un nombre de al menos 3 letras.",
+                duplicado: "⚠️ ATENCIÓN EN DISTRIBUCIÓN FINAL: {0}\nEsta familia ya figura en el registro de este ciclo. Trazabilidad derecha bloquea doble entrega.",
+                exito: "✅ Distribución final exitosa. Familia registrada: {0}\nEstado: HABILITADA en padrón de equidad.",
+                auraRechazo: "AURA: Entrada rechazada. {0}",
+                auraDuplicado: "AURA: ⚠️ Alerta de equidad (Trazabilidad Derecha). Doble entrega bloqueada para: {0}.",
+                auraExito: "AURA: Trazabilidad derecha actualizada en distribución final con: {0}.",
+                cierreSinAprobar: "🔒 Primero el Validation Lead debe aprobar la operación.",
+                confirmaCierre: "¿Cerrar el ciclo {0}? Se archivan {1} registros y las familias podrán recibir de nuevo.",
+                cierreOk: "AURA: Ciclo cerrado y archivado. Comienza el ciclo {0}.",
+                kallpaLocal: "KALLPA (reglas locales): despachar primero el lote {0} (vence en {1} días).",
+                kallpaSinLotes: "KALLPA (reglas locales): no hay lotes pendientes.",
+                auraLocal: "AURA (reglas locales): ciclo {0}, {1} entregas y {2} bloqueos de doble entrega.",
+                iaK: "KALLPA (IA · requiere aprobación humana): {0}",
+                iaA: "AURA (IA · requiere aprobación humana): {0}",
+                nubeOk: "● Conectado a la Nube (Azure AI Foundry)",
+                nubeOff: "● Modo contingencia: agentes con reglas locales",
+                nubeVer: "● Verificando conexión…",
+                nubeForzada: "● Slack Tecnológico Activo (contingencia forzada)"
+            },
+            ht: {
+                btnSlck: "📡 Chanje Slack Teknoloji (San koneksyon/Nyaj)",
+                btnCerrar: "🔒 Fèmen Sik Distribisyon an",
+                secPadron: "📋 Rejis Distribisyon Final an Dirèk (Fanmi ak Benefisyè Anrejistre)",
+                ciclo: "Sik",
+                promptId: "Antre RUT oswa non reprezantan fanmi an (Distribisyon final):",
+                rutInvalido: "RUT pa valid: tcheke dènye chif verifikasyon an.",
+                idInvalida: "Antre yon RUT ki valid oswa yon non ki gen omwen 3 lèt.",
+                duplicado: "⚠️ ATANSYON, DISTRIBISYON FINAL: {0}\nFanmi sa a deja nan rejis sik sa a. Trasabilite a bloke yon dezyèm livrezon.",
+                exito: "✅ Distribisyon final reyisi. Fanmi anrejistre: {0}\nEta: AKTIVE nan rejis ekite a.",
+                auraRechazo: "AURA: Antre refize. {0}",
+                auraDuplicado: "AURA: ⚠️ Alèt ekite. Dezyèm livrezon bloke pou: {0}.",
+                auraExito: "AURA: Trasabilite mete ajou ak: {0}.",
+                cierreSinAprobar: "🔒 Validation Lead la dwe apwouve operasyon an anvan.",
+                confirmaCierre: "Fèmen sik {0} la? {1} anrejistreman pral achive epi fanmi yo ap ka resevwa ankò.",
+                cierreOk: "AURA: Sik la fèmen epi achive. Sik {0} kòmanse.",
+                kallpaLocal: "KALLPA (règ lokal): voye lòt {0} an premye (li ekspire nan {1} jou).",
+                kallpaSinLotes: "KALLPA (règ lokal): pa gen lòt ki annatant.",
+                auraLocal: "AURA (règ lokal): sik {0}, {1} livrezon ak {2} blokaj dezyèm livrezon.",
+                iaK: "KALLPA (IA · mande apwobasyon moun): {0}",
+                iaA: "AURA (IA · mande apwobasyon moun): {0}",
+                nubeOk: "● Konekte ak Nyaj la (Azure AI Foundry)",
+                nubeOff: "● Mòd ijans: ajan yo ap travay ak règ lokal",
+                nubeVer: "● Verifye koneksyon…",
+                nubeForzada: "● Slack Teknoloji aktif (mòd ijans fòse)"
+            },
+            en: {
+                btnCerrar: "🔒 Close Distribution Cycle",
+                secPadron: "📋 Live Final Distribution Register (Registered Families and Beneficiaries)",
+                ciclo: "Cycle",
+                promptId: "Enter the RUT (national ID) or name of the family representative (Final Distribution):",
+                rutInvalido: "Invalid RUT: check the check digit.",
+                idInvalida: "Enter a valid RUT or a name of at least 3 letters.",
+                duplicado: "⚠️ FINAL DISTRIBUTION ALERT: {0}\nThis family is already registered in this cycle. Right-side traceability blocks a double delivery.",
+                exito: "✅ Final distribution successful. Family registered: {0}\nStatus: ENABLED in the equity register.",
+                auraRechazo: "AURA: Entry rejected. {0}",
+                auraDuplicado: "AURA: ⚠️ Equity alert (Right-side Traceability). Double delivery blocked for: {0}.",
+                auraExito: "AURA: Right-side traceability updated in final distribution with: {0}.",
+                cierreSinAprobar: "🔒 The Validation Lead must approve the operation first.",
+                confirmaCierre: "Close cycle {0}? {1} records will be archived and families will be able to receive again.",
+                cierreOk: "AURA: Cycle closed and archived. Cycle {0} begins.",
+                kallpaLocal: "KALLPA (local rules): dispatch lot {0} first (expires in {1} days).",
+                kallpaSinLotes: "KALLPA (local rules): no pending lots.",
+                auraLocal: "AURA (local rules): cycle {0}, {1} deliveries and {2} double-delivery blocks.",
+                iaK: "KALLPA (AI · needs human approval): {0}",
+                iaA: "AURA (AI · needs human approval): {0}",
+                nubeOk: "● Connected to the Cloud (Azure AI Foundry)",
+                nubeOff: "● Contingency mode: agents using local rules",
+                nubeVer: "● Checking connection…",
+                nubeForzada: "● Tech Slack Active (forced contingency)"
+            },
+            fr: {
+                btnSlck: "📡 Basculer Slack Tech (Hors ligne/Nuage)",
+                btnCerrar: "🔒 Clôturer le Cycle de Distribution",
+                secPadron: "📋 Registre en direct de la Distribution Finale (Familles et Bénéficiaires)",
+                ciclo: "Cycle",
+                promptId: "Saisissez le RUT ou le nom du représentant de la famille (Distribution finale) :",
+                rutInvalido: "RUT invalide : vérifiez la clé de contrôle.",
+                idInvalida: "Saisissez un RUT valide ou un nom d'au moins 3 lettres.",
+                duplicado: "⚠️ ATTENTION, DISTRIBUTION FINALE : {0}\nCette famille figure déjà dans le registre de ce cycle. La traçabilité aval bloque la double distribution.",
+                exito: "✅ Distribution finale réussie. Famille enregistrée : {0}\nStatut : HABILITÉE dans le registre d'équité.",
+                auraRechazo: "AURA : saisie refusée. {0}",
+                auraDuplicado: "AURA : ⚠️ Alerte d'équité (traçabilité aval). Double distribution bloquée pour : {0}.",
+                auraExito: "AURA : traçabilité aval mise à jour avec : {0}.",
+                cierreSinAprobar: "🔒 Le Validation Lead doit d'abord approuver l'opération.",
+                confirmaCierre: "Clôturer le cycle {0} ? {1} enregistrements seront archivés et les familles pourront recevoir à nouveau.",
+                cierreOk: "AURA : cycle clôturé et archivé. Le cycle {0} commence.",
+                kallpaLocal: "KALLPA (règles locales) : expédier d'abord le lot {0} (expire dans {1} jours).",
+                kallpaSinLotes: "KALLPA (règles locales) : aucun lot en attente.",
+                auraLocal: "AURA (règles locales) : cycle {0}, {1} distributions et {2} doubles distributions bloquées.",
+                iaK: "KALLPA (IA · approbation humaine requise) : {0}",
+                iaA: "AURA (IA · approbation humaine requise) : {0}",
+                nubeOk: "● Connecté au Cloud (Azure AI Foundry)",
+                nubeOff: "● Mode contingence : agents en règles locales",
+                nubeVer: "● Vérification de la connexion…",
+                nubeForzada: "● Slack Tech actif (contingence forcée)"
+            },
+            pt: {
+                btnSlck: "📡 Alternar Slack Tecnológico (Offline/Nuvem)",
+                txtBtnBeneficiario: "🔍 Validar Família / Beneficiário (Distribuição Final)",
+                btnCerrar: "🔒 Encerrar Ciclo de Distribuição",
+                secPadron: "📋 Cadastro ao Vivo da Distribuição Final (Famílias e Beneficiários)",
+                ciclo: "Ciclo",
+                promptId: "Informe o RUT ou o nome do representante da família (Distribuição final):",
+                rutInvalido: "RUT inválido: confira o dígito verificador.",
+                idInvalida: "Informe um RUT válido ou um nome com pelo menos 3 letras.",
+                duplicado: "⚠️ ATENÇÃO NA DISTRIBUIÇÃO FINAL: {0}\nEsta família já consta no registro deste ciclo. A rastreabilidade à frente bloqueia a entrega duplicada.",
+                exito: "✅ Distribuição final concluída. Família registrada: {0}\nStatus: HABILITADA no cadastro de equidade.",
+                auraRechazo: "AURA: entrada recusada. {0}",
+                auraDuplicado: "AURA: ⚠️ Alerta de equidade (rastreabilidade à frente). Entrega duplicada bloqueada para: {0}.",
+                auraExito: "AURA: rastreabilidade à frente atualizada com: {0}.",
+                cierreSinAprobar: "🔒 O Validation Lead precisa aprovar a operação primeiro.",
+                confirmaCierre: "Encerrar o ciclo {0}? {1} registros serão arquivados e as famílias poderão receber novamente.",
+                cierreOk: "AURA: ciclo encerrado e arquivado. O ciclo {0} começa.",
+                kallpaLocal: "KALLPA (regras locais): despachar primeiro o lote {0} (vence em {1} dias).",
+                kallpaSinLotes: "KALLPA (regras locais): não há lotes pendentes.",
+                auraLocal: "AURA (regras locais): ciclo {0}, {1} entregas e {2} bloqueios de entrega duplicada.",
+                iaK: "KALLPA (IA · requer aprovação humana): {0}",
+                iaA: "AURA (IA · requer aprovação humana): {0}",
+                nubeOk: "● Conectado à Nuvem (Azure AI Foundry)",
+                nubeOff: "● Modo de contingência: agentes com regras locais",
+                nubeVer: "● Verificando conexão…",
+                nubeForzada: "● Slack Tecnológico ativo (contingência forçada)"
+            }
+        };
+        Object.keys(textosNuevos).forEach(function (l) { Object.assign(traducciones[l], textosNuevos[l]); });
+
+        const textosMesa = {
+            es: {
+                iaRevisa: "AURA revisa a KALLPA (IA · requiere aprobación humana): {0}",
+                localRevisa: "AURA (reglas locales) revisa a KALLPA: sin objeciones de equidad. Ciclo {0}: {1} entregas y {2} bloqueos de doble entrega.",
+                sinConversacion: "(Modo contingencia: sin conversación libre, te muestro el estado con reglas locales.)",
+                operador: "Tú → {0}: {1}",
+                preguntaPlaceholder: "Pregunta a un agente (no escribas nombres ni RUT de familias)",
+                btnPreguntar: "Preguntar"
+            },
+            ht: {
+                iaRevisa: "AURA revize KALLPA (IA · mande apwobasyon moun): {0}",
+                localRevisa: "AURA (règ lokal) revize KALLPA: pa gen objeksyon sou ekite. Sik {0}: {1} livrezon ak {2} blokaj dezyèm livrezon.",
+                sinConversacion: "(Mòd ijans: pa gen konvèsasyon lib, m ap montre eta a ak règ lokal.)",
+                operador: "Ou → {0}: {1}",
+                preguntaPlaceholder: "Poze yon ajan yon kesyon (pa ekri non oswa RUT fanmi)",
+                btnPreguntar: "Mande"
+            },
+            en: {
+                iaRevisa: "AURA reviews KALLPA (AI · needs human approval): {0}",
+                localRevisa: "AURA (local rules) reviews KALLPA: no equity objections. Cycle {0}: {1} deliveries and {2} double-delivery blocks.",
+                sinConversacion: "(Contingency mode: no free conversation, showing the status with local rules.)",
+                operador: "You → {0}: {1}",
+                preguntaPlaceholder: "Ask an agent (do not type family names or RUT)",
+                btnPreguntar: "Ask"
+            },
+            fr: {
+                iaRevisa: "AURA examine KALLPA (IA · approbation humaine requise) : {0}",
+                localRevisa: "AURA (règles locales) examine KALLPA : aucune objection d'équité. Cycle {0} : {1} distributions et {2} doubles distributions bloquées.",
+                sinConversacion: "(Mode contingence : pas de conversation libre, voici l'état selon les règles locales.)",
+                operador: "Vous → {0} : {1}",
+                preguntaPlaceholder: "Posez une question à un agent (sans noms ni RUT de familles)",
+                btnPreguntar: "Demander"
+            },
+            pt: {
+                iaRevisa: "AURA revisa KALLPA (IA · requer aprovação humana): {0}",
+                localRevisa: "AURA (regras locais) revisa KALLPA: sem objeções de equidade. Ciclo {0}: {1} entregas e {2} bloqueios de entrega duplicada.",
+                sinConversacion: "(Modo de contingência: sem conversa livre, mostro o estado com regras locais.)",
+                operador: "Você → {0}: {1}",
+                preguntaPlaceholder: "Pergunte a um agente (não escreva nomes nem RUT de famílias)",
+                btnPreguntar: "Perguntar"
+            }
+        };
+        Object.keys(textosMesa).forEach(function (l) { Object.assign(traducciones[l], textosMesa[l]); });
+
+        const textosSdd = {
+            es: {
+                sddTitulo: "📐 Spec Driven Development: cómo se construyó este sistema (ver detalle)",
+                sddMetodo: "1. Contexto persistente: archivo AGENTS.md con las reglas del proyecto para el agente de IA.\n2. Especificación de un feature: «Entrega única por ciclo» (spec 001), con problema, solución y 5 criterios verificables.\n3. Skill de marca: colores, tipografía y tono de SYCCHILE 3.000 (marca-sycchile).\n4. Implementación con un agente de IA y una prueba automática por criterio.",
+                sddProblema: "Problema: sin un control de ciclo, una familia podía figurar dos veces (por tildes, mayúsculas o un RUT mal escrito) y recibir doble entrega, lo que rompe la equidad.",
+                sddSolucion: "Solución: se valida el RUT, se compara la identidad sin tildes ni mayúsculas, se bloquea el duplicado dentro del ciclo activo y el cierre de ciclo lo aprueba el Validation Lead.",
+                sddCriterios: "CA1. Un duplicado (aunque cambien tildes, mayúsculas, puntos o guion) se bloquea.\nCA2. Un RUT con dígito verificador incorrecto se rechaza.\nCA3. Un nombre con código se muestra como texto y no se ejecuta.\nCA4. Al recargar la página, el padrón del ciclo se ve completo.\nCA5. Cerrar el ciclo exige aprobación humana y permite recibir de nuevo.",
+                sddPrincipio: "Principio: las reglas deciden, la IA recomienda y la persona aprueba. Cada criterio tiene una prueba automática. Las mejoras posteriores (agentes conectados e interactivos) siguen el mismo método."
+            },
+            ht: {
+                sddTitulo: "📐 Spec Driven Development: ki jan yo konstwi sistèm sa a (gade detay)",
+                sddMetodo: "1. Kontèks pèmanan: yon fichye AGENTS.md ak règ pwojè a pou ajan IA a.\n2. Espesifikasyon yon fonksyon: « Yon sèl livrezon pa sik » (spec 001), ak pwoblèm, solisyon ak 5 kritè ki ka verifye.\n3. Skill mak: koulè, tipografi ak ton SYCCHILE 3.000 (marca-sycchile).\n4. Aplikasyon ak yon ajan IA ak yon tès otomatik pou chak kritè.",
+                sddProblema: "Pwoblèm: san kontwòl sik, yon fanmi te ka parèt de fwa (akoz aksan, majiskil oswa yon RUT ki mal ekri) epi resevwa de livrezon, sa ki kraze ekite.",
+                sddSolucion: "Solisyon: RUT la verifye, idantite a konpare san aksan ni majiskil, doub la bloke andedan sik ki aktif la, epi Validation Lead la apwouve fèmti sik la.",
+                sddCriterios: "CA1. Yon doub (menm si aksan, majiskil, pwen oswa tirè chanje) bloke.\nCA2. Yon RUT ak move chif verifikasyon refize.\nCA3. Yon non ki gen kòd montre kòm tèks epi pa janm egzekite.\nCA4. Apre rechaje paj la, rejis sik la parèt nèt.\nCA5. Fèmen sik la mande apwobasyon moun epi fanmi yo ka resevwa ankò.",
+                sddPrincipio: "Prensip: règ yo deside, IA a rekòmande epi yon moun apwouve. Chak kritè gen yon tès otomatik. Amelyorasyon pita yo (ajan konekte ak entèaktif) swiv menm metòd la."
+            },
+            en: {
+                sddTitulo: "📐 Spec Driven Development: how this system was built (see details)",
+                sddMetodo: "1. Persistent context: an AGENTS.md file with the project rules for the AI agent.\n2. Spec for one feature: “One delivery per cycle” (spec 001), with problem, solution and 5 verifiable criteria.\n3. Brand skill: SYCCHILE 3.000 colors, typography and tone (marca-sycchile).\n4. Implementation with an AI agent and one automated test per criterion.",
+                sddProblema: "Problem: without a cycle control, a family could appear twice (because of accents, capital letters or a mistyped RUT) and receive a double delivery, which breaks equity.",
+                sddSolucion: "Solution: the RUT is validated, identity is compared without accents or capitals, duplicates are blocked within the active cycle, and closing a cycle is approved by the Validation Lead.",
+                sddCriterios: "CA1. A duplicate (even if accents, capitals, dots or hyphen change) is blocked.\nCA2. A RUT with a wrong check digit is rejected.\nCA3. A name containing code is shown as text and never runs.\nCA4. After reloading the page, the cycle register is fully shown.\nCA5. Closing the cycle requires human approval and lets families receive again.",
+                sddPrincipio: "Principle: rules decide, AI recommends and a person approves. Every criterion has an automated test. Later improvements (connected, interactive agents) follow the same method."
+            },
+            fr: {
+                sddTitulo: "📐 Spec Driven Development : comment ce système a été construit (voir le détail)",
+                sddMetodo: "1. Contexte persistant : un fichier AGENTS.md avec les règles du projet pour l'agent d'IA.\n2. Spécification d'une fonctionnalité : « Une seule distribution par cycle » (spec 001), avec problème, solution et 5 critères vérifiables.\n3. Skill de marque : couleurs, typographie et ton de SYCCHILE 3.000 (marca-sycchile).\n4. Mise en œuvre avec un agent d'IA et un test automatique par critère.",
+                sddProblema: "Problème : sans contrôle de cycle, une famille pouvait apparaître deux fois (à cause d'accents, de majuscules ou d'un RUT mal saisi) et recevoir une double distribution, ce qui rompt l'équité.",
+                sddSolucion: "Solution : le RUT est validé, l'identité est comparée sans accents ni majuscules, les doublons sont bloqués dans le cycle actif et la clôture du cycle est approuvée par le Validation Lead.",
+                sddCriterios: "CA1. Un doublon (même si accents, majuscules, points ou tiret changent) est bloqué.\nCA2. Un RUT dont la clé de contrôle est incorrecte est refusé.\nCA3. Un nom contenant du code s'affiche comme texte et ne s'exécute jamais.\nCA4. Après rechargement de la page, le registre du cycle s'affiche en entier.\nCA5. Clôturer le cycle exige une approbation humaine et permet de recevoir à nouveau.",
+                sddPrincipio: "Principe : les règles décident, l'IA recommande et une personne approuve. Chaque critère a un test automatique. Les améliorations ultérieures (agents connectés et interactifs) suivent la même méthode."
+            },
+            pt: {
+                sddTitulo: "📐 Spec Driven Development: como este sistema foi construído (ver detalhe)",
+                sddMetodo: "1. Contexto persistente: um arquivo AGENTS.md com as regras do projeto para o agente de IA.\n2. Especificação de uma funcionalidade: «Entrega única por ciclo» (spec 001), com problema, solução e 5 critérios verificáveis.\n3. Skill de marca: cores, tipografia e tom do SYCCHILE 3.000 (marca-sycchile).\n4. Implementação com um agente de IA e um teste automático por critério.",
+                sddProblema: "Problema: sem controle de ciclo, uma família podia aparecer duas vezes (por acentos, maiúsculas ou um RUT digitado errado) e receber entrega duplicada, o que quebra a equidade.",
+                sddSolucion: "Solução: o RUT é validado, a identidade é comparada sem acentos nem maiúsculas, o duplicado é bloqueado dentro do ciclo ativo e o encerramento do ciclo é aprovado pelo Validation Lead.",
+                sddCriterios: "CA1. Um duplicado (mesmo que mudem acentos, maiúsculas, pontos ou hífen) é bloqueado.\nCA2. Um RUT com dígito verificador errado é recusado.\nCA3. Um nome com código é mostrado como texto e nunca é executado.\nCA4. Ao recarregar a página, o cadastro do ciclo aparece completo.\nCA5. Encerrar o ciclo exige aprovação humana e permite que as famílias recebam de novo.",
+                sddPrincipio: "Princípio: as regras decidem, a IA recomenda e uma pessoa aprova. Cada critério tem um teste automático. As melhorias posteriores (agentes conectados e interativos) seguem o mesmo método."
+            }
+        };
+        Object.keys(textosSdd).forEach(function (l) { Object.assign(traducciones[l], textosSdd[l]); });
+
+        const textosAviso = {
+            es: { avisoDemo: "ℹ️ Prototipo de demostración (entorno de prueba): ingresa solo datos ficticios. La aprobación del Validation Lead no identifica a nadie y los datos quedan solo en este navegador." },
+            ht: { avisoDemo: "ℹ️ Pwototip demonstrasyon (anviwònman tès): antre sèlman done fiktif. Apwobasyon Validation Lead la pa idantifye pèsonn epi done yo rete sèlman nan navigatè sa a." },
+            en: { avisoDemo: "ℹ️ Demonstration prototype (test environment): enter fictitious data only. The Validation Lead approval does not identify anyone and data stays only in this browser." },
+            fr: { avisoDemo: "ℹ️ Prototype de démonstration (environnement de test) : saisissez uniquement des données fictives. L'approbation du Validation Lead n'identifie personne et les données restent uniquement dans ce navigateur." },
+            pt: { avisoDemo: "ℹ️ Protótipo de demonstração (ambiente de teste): insira apenas dados fictícios. A aprovação do Validation Lead não identifica ninguém e os dados ficam apenas neste navegador." }
+        };
+        Object.keys(textosAviso).forEach(function (l) { Object.assign(traducciones[l], textosAviso[l]); });
+        function pintarSdd() {
+            const t = textosActuales();
+            [['txtSddTitulo', 'sddTitulo'], ['txtSddMetodo', 'sddMetodo'], ['txtSddProblema', 'sddProblema'],
+             ['txtSddSolucion', 'sddSolucion'], ['txtSddCriterios', 'sddCriterios'], ['txtSddPrincipio', 'sddPrincipio']
+            ].forEach(function (par) { document.getElementById(par[0]).textContent = t[par[1]]; });
+            document.getElementById('avisoDemo').textContent = t.avisoDemo;
+        }
+        // Mapudungun: solo lo verificado. Lo demás cae al español hasta que lo valide una persona hablante.
+        traducciones.map = { speechText: "Mari mari. Sistema Integrado de Gestión Logística SIC CHILE küla warangka. Kümelekaley." };
+
+        function textosActuales() {
+            const l = document.getElementById('idiomaSelect').value;
+            return Object.assign({}, traducciones.es, traducciones[l]);
+        }
+        function msg(clave) {
+            let s = textosActuales()[clave] || '';
+            for (let i = 1; i < arguments.length; i++) s = s.split('{' + (i - 1) + '}').join(String(arguments[i]));
+            return s;
+        }
+
+        const langVoiceMap = {
+            es: 'es-CL',
+            ht: 'fr-FR',
+            map: 'es-CL',
+            en: 'en-US',
+            fr: 'fr-FR',
+            pt: 'pt-BR'
+        };
+
+        function cambiarIdioma() {
+            const lang = document.getElementById('idiomaSelect').value;
+            const t = Object.assign({}, traducciones.es, traducciones[lang]);
+            
+            document.getElementById('txtSub').innerText = t.sub;
+            document.getElementById('txtSecKpi').innerText = t.secKpi;
+            document.getElementById('txtSecControl').innerText = t.secControl;
+            document.getElementById('btnIngreso').innerText = t.btnIngr;
+            document.getElementById('btnDespacho').innerText = t.btnDesp;
+            document.getElementById('btnPrioridad').innerText = t.btnPrio;
+            document.getElementById('btnSlack').innerText = t.btnSlck;
+            document.getElementById('txtBtnVoice').innerText = t.btnVoice;
+            document.getElementById('txtBtnBeneficiario').innerText = t.txtBtnBeneficiario;
+
+            document.getElementById('thLote').innerText = t.thL;
+            document.getElementById('thAlimento').innerText = t.thA;
+            document.getElementById('thEntradas').innerText = t.thE;
+            document.getElementById('thSalidas').innerText = t.thS;
+            document.getElementById('thStock').innerText = t.thSt;
+            document.getElementById('thRotacion').innerText = t.thR;
+            document.getElementById('thPri').innerText = t.thP;
+            document.getElementById('btnCerrarCiclo').innerText = t.btnCerrar;
+            document.getElementById('txtSecPadron').innerText = t.secPadron;
+            document.getElementById('txtCiclo').innerText = t.ciclo;
+            document.getElementById('preguntaAgente').placeholder = t.preguntaPlaceholder;
+            document.getElementById('btnPreguntar').innerText = t.btnPreguntar;
+            document.documentElement.lang = lang === 'map' ? 'arn' : lang;
+            pintarSdd();
+            pintarBadge();
+            consultarAgentes();
+        }
+
+        function registrarIngresoInteractive() {
+            const nombreAlimento = prompt("Ingrese el alimento donado (ej. Arroz, Legumbres):", "Arroz Grado 1");
+            if (!nombreAlimento) return;
+            
+            const kilosStr = prompt("Ingrese los kilos recibidos:", "1000");
+            const kilos = parseFloat(kilosStr) || 1000;
+            const randomLote = "#LOT-" + Math.floor(1000 + Math.random() * 9000);
+
+            const tabla = document.getElementById("tablaInventario").getElementsByTagName('tbody')[0];
+            const nuevaFila = tabla.insertRow(0);
+            nuevaFila.innerHTML = `
+                <td>${randomLote}</td>
+                <td>${nombreAlimento} (Ingreso Reciente)</td>
+                <td>${kilos.toLocaleString()} kg</td>
+                <td>0 kg</td>
+                <td class="stock-val">${kilos.toLocaleString()} kg</td>
+                <td class="rotacion-val">100%</td>
+                <td><span class="priority-normal">Normal (60 días - Resguardado)</span></td>
+            `;
+
+            let capActual = parseInt(document.getElementById('valCapacidad').innerText) || 78;
+            capActual = Math.min(95, capActual + 4);
+            document.getElementById('valCapacidad').innerText = capActual + "%";
+            document.getElementById('barraCapacidad').style.width = capActual + "%";
+
+            document.getElementById('kallpaStatus').innerText = "KALLPA: Ingreso " + nombreAlimento + " (" + kilos + "kg). Trazabilidad hacia atrás registrada.";
+            document.getElementById('auraAuditStatus').innerText = "AURA: Trazabilidad izquierda (condiciones de bodega) auditada correctamente.";
+            resetearSupervisionHumana();
+        }
+
+        function procesarDespachoInteractive() {
+            const tbody = document.getElementById("tablaInventario").getElementsByTagName('tbody')[0];
+            const elegido = loteFIFO();
+            if (elegido) {
+                const primeraFila = elegido.fila;
+                primeraFila.cells[3].innerText = primeraFila.cells[2].innerText;
+                primeraFila.cells[4].innerText = "0 kg (Despachado)";
+                primeraFila.cells[5].innerText = "0% (Rotación Completa)";
+                primeraFila.cells[6].innerHTML = '<span style="color: var(--text-muted);">✓ Entregado (Trazabilidad Hacia Adelante OK)</span>';
+
+                document.getElementById('valCapacidad').innerText = "72%";
+                document.getElementById('barraCapacidad').style.width = "72%";
+                document.getElementById('valDiasBodega').innerText = "3.2 Días";
+
+                document.getElementById('kallpaStatus').innerText = "KALLPA: Despacho FIFO ejecutado (lote " + elegido.lote + "). Trazabilidad hacia adelante actualizada.";
+                document.getElementById('auraAuditStatus').innerText = "AURA: Auditoría OK. Trazabilidad derecha (equidad social) verificada.";
+                resetearSupervisionHumana();
+            } else {
+                alert("No hay lotes pendientes en la bodega.");
+            }
+        }
+
+        // ===== Spec 001: entrega única por ciclo (equidad) =====
+        const CLAVE_PADRON = 'sycchile_padron_v2';
+
+        function validarRut(cuerpoDv) {
+            const cuerpo = cuerpoDv.slice(0, -1), dv = cuerpoDv.slice(-1).toLowerCase();
+            let suma = 0, factor = 2;
+            for (let i = cuerpo.length - 1; i >= 0; i--) {
+                suma += parseInt(cuerpo[i], 10) * factor;
+                factor = factor === 7 ? 2 : factor + 1;
+            }
+            const r = 11 - (suma % 11);
+            return dv === (r === 11 ? '0' : r === 10 ? 'k' : String(r));
+        }
+
+        function interpretarIdentidad(texto) {
+            const limpio = String(texto).replace(/[.\-\s]/g, '');
+            if (/^\d{7,8}[\dkK]$/.test(limpio)) {
+                if (!validarRut(limpio)) return { error: 'rutInvalido' };
+                const cuerpo = limpio.slice(0, -1).replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+                return { clave: 'rut:' + limpio.toLowerCase(), mostrar: cuerpo + '-' + limpio.slice(-1).toUpperCase() };
+            }
+            const nombre = String(texto).trim().replace(/\s+/g, ' ');
+            if (nombre.length < 3 || !/[a-zA-ZñÑáéíóúÁÉÍÓÚ]/.test(nombre)) return { error: 'idInvalida' };
+            const norm = nombre.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+            return { clave: 'nom:' + norm, mostrar: nombre };
+        }
+
+        function leerPadron() {
+            try {
+                const d = JSON.parse(localStorage.getItem(CLAVE_PADRON));
+                if (d && Array.isArray(d.registros) && d.ciclo) return d;
+            } catch (e) {}
+            return { ciclo: 1, registros: [], historial: [], bloqueos: 0 };
+        }
+
+        function guardarPadron(d) {
+            try { localStorage.setItem(CLAVE_PADRON, JSON.stringify(d)); } catch (e) {}
+        }
+
+        function agregarFilaPadron(reg, alInicio) {
+            const tb = document.getElementById('listaBeneficiariosBody');
+            const tr = tb.insertRow(alInicio ? 0 : -1);
+            const fuerte = document.createElement('strong');
+            fuerte.textContent = reg.nombre;
+            tr.insertCell().appendChild(fuerte);
+            const estado = document.createElement('span');
+            estado.style.color = 'var(--accent-green)';
+            estado.style.fontWeight = '600';
+            estado.textContent = '✓ Entregado con Éxito';
+            tr.insertCell().appendChild(estado);
+            tr.insertCell().textContent = reg.fecha + ' · Ciclo ' + reg.ciclo;
+            const aura = document.createElement('span');
+            aura.style.color = 'var(--accent-blue)';
+            aura.textContent = 'Trazabilidad Derecha OK (Sin duplicados)';
+            tr.insertCell().appendChild(aura);
+        }
+
+        function cargarPadron() {
+            const d = leerPadron();
+            if (d.ciclo === 1 && d.registros.length === 0 && (d.historial || []).length === 0) {
+                d.registros.push({ nombre: 'Juan Pérez', clave: 'nom:juan perez', fecha: '02/11/2026 - 08:30 hrs', ciclo: 1 });
+                guardarPadron(d);
+            }
+            document.getElementById('listaBeneficiariosBody').textContent = '';
+            d.registros.forEach(function (r) { agregarFilaPadron(r, true); });
+            document.getElementById('cicloActivo').textContent = d.ciclo;
+        }
+
+        function verificarBeneficiario() {
+            const entrada = prompt(msg('promptId'), "María González");
+            if (entrada === null) return;
+            const aura = document.getElementById('auraAuditStatus');
+            const id = interpretarIdentidad(entrada);
+            if (id.error) {
+                const aviso = msg(id.error);
+                alert("⚠️ " + aviso);
+                aura.innerText = msg('auraRechazo', aviso);
+                return;
+            }
+            const d = leerPadron();
+            if (d.registros.some(function (r) { return r.clave === id.clave; })) {
+                d.bloqueos = (d.bloqueos || 0) + 1;
+                guardarPadron(d);
+                alert(msg('duplicado', id.mostrar));
+                aura.innerText = msg('auraDuplicado', id.mostrar);
+                return;
+            }
+            const reg = { nombre: id.mostrar, clave: id.clave, fecha: new Date().toLocaleString(), ciclo: d.ciclo };
+            d.registros.push(reg);
+            guardarPadron(d);
+            agregarFilaPadron(reg, true);
+            alert(msg('exito', id.mostrar));
+            aura.innerText = msg('auraExito', id.mostrar);
+            resetearSupervisionHumana();
+        }
+
+        function cerrarCiclo() {
+            if (!aprobadoLead) {
+                alert(msg('cierreSinAprobar'));
+                return;
+            }
+            const d = leerPadron();
+            if (!confirm(msg('confirmaCierre', d.ciclo, d.registros.length))) return;
+            d.historial = (d.historial || []).concat(d.registros);
+            d.registros = [];
+            d.bloqueos = 0;
+            d.ciclo += 1;
+            guardarPadron(d);
+            cargarPadron();
+            document.getElementById('auraAuditStatus').innerText = msg('cierreOk', d.ciclo);
+            resetearSupervisionHumana();
+        }
+
+        let estadoPrioridadAlternada = false;
+        function alternarPrioridadInteractive() {
+            const tbody = document.getElementById("tablaInventario").getElementsByTagName('tbody')[0];
+            if (tbody && tbody.rows.length > 0) {
+                estadoPrioridadAlternada = !estadoPrioridadAlternada;
+                const celdaTarget = tbody.rows[0].cells[6];
+
+                if (estadoPrioridadAlternada) {
+                    celdaTarget.innerHTML = '<span class="priority-high">🚨 ¡ALERTA MÁXIMA: Consumo Inmediato Requerido!</span>';
+                    document.getElementById('kallpaStatus').innerText = "KALLPA: Lote marcado para despacho prioritario.";
+                    document.getElementById('auraAuditStatus').innerText = "AURA: 🚨 Riesgo neutralizado mediante rotación acelerada FIFO.";
+                } else {
+                    celdaTarget.innerHTML = '<span class="priority-med">Media (15 días)</span>';
+                    document.getElementById('kallpaStatus').innerText = "KALLPA: Trazabilidad izquierda (temperatura y ventilación) normalizada.";
+                    document.getElementById('auraAuditStatus').innerText = "AURA: Auditoría OK.";
+                }
+                resetearSupervisionHumana();
+            }
+        }
+
+        let aprobadoLead = false;
+
+        function autorizarSupervision() {
+            aprobadoLead = !aprobadoLead;
+            const spanSupervision = document.getElementById('estadoSupervision');
+            const btnSupervision = document.getElementById('btnGovApprove');
+
+            if (aprobadoLead) {
+                spanSupervision.innerText = "✓ Operación autorizada por Jorge Almendares Aros (Validation Lead).";
+                spanSupervision.style.color = "var(--accent-green)";
+                btnSupervision.innerText = "↺ Revocar / Reabrir Revisión";
+                btnSupervision.style.background = "var(--accent-orange)";
+                btnSupervision.style.color = "var(--bg-dark)";
+            } else {
+                resetearSupervisionHumana();
+            }
+        }
+
+        function resetearSupervisionHumana() {
+            aprobadoLead = false;
+            const spanSupervision = document.getElementById('estadoSupervision');
+            const btnSupervision = document.getElementById('btnGovApprove');
+            spanSupervision.innerText = "⚠️ Validación Humana Pendiente: Operación sujeta a revisión final.";
+            spanSupervision.style.color = "var(--accent-orange)";
+            btnSupervision.innerText = "✓ Aprobar como Validation Lead";
+            btnSupervision.style.background = "var(--accent-green)";
+            btnSupervision.style.color = "var(--bg-dark)";
+            programarConsultaAgentes();
+        }
+
+        let enModoOffline = false;
+        function simularSlackTecnologico() {
+            contingenciaForzada = !contingenciaForzada;
+            enModoOffline = contingenciaForzada;
+            pintarBadge();
+            consultarAgentes();
+        }
+
+        function speakAuraInstruction() {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                
+                const langKey = document.getElementById('idiomaSelect').value;
+                const text = traducciones[langKey] ? traducciones[langKey].speechText : traducciones['es'].speechText;
+                const langCode = langVoiceMap[langKey] || 'es-CL';
+                
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = langCode;
+                utterance.rate = 0.95;
+
+                const voices = window.speechSynthesis.getVoices();
+                const matchedVoice = voices.find(voice => voice.lang.startsWith(langCode.substring(0, 2)));
+                if (matchedVoice) {
+                    utterance.voice = matchedVoice;
+                }
+
+                window.speechSynthesis.speak(utterance);
+            } else {
+                alert("La síntesis de voz no está soportada en este navegador.");
+            }
+        }
+
+        if ('speechSynthesis' in window) {
+            window.speechSynthesis.onvoiceschanged = () => {
+                window.speechSynthesis.getVoices();
+            };
+        }
+
+        // ===== Spec 002: KALLPA y AURA como agentes conectados =====
+        // Las reglas deciden, la IA recomienda, el humano aprueba. A la nube solo van lotes y conteos.
+        let contingenciaForzada = false;
+        let nubeActiva = null;
+        let consultaId = 0;
+        let temporizadorAgentes = null;
+
+        function pintarBadge() {
+            const clave = contingenciaForzada ? 'nubeForzada' : nubeActiva === null ? 'nubeVer' : nubeActiva ? 'nubeOk' : 'nubeOff';
+            const ok = clave === 'nubeOk';
+            const b = document.getElementById('statusBadge');
+            b.style.background = ok ? "rgba(34, 197, 94, 0.1)" : "rgba(249, 115, 22, 0.2)";
+            b.style.borderColor = ok ? "var(--accent-green)" : "var(--accent-orange)";
+            b.style.color = ok ? "var(--accent-green)" : "var(--accent-orange)";
+            b.textContent = msg(clave);
+        }
+
+        function diasParaVencer(texto) {
+            const mt = /(\d+)\s*d[ií]as/i.exec(texto);
+            if (mt) return parseInt(mt[1], 10);
+            return /ALERTA M[ÁA]XIMA|Inmediat/i.test(texto) ? 0 : 9999;
+        }
+
+        function lotesPendientes() {
+            const filas = Array.from(document.getElementById('tablaInventario').tBodies[0].rows);
+            return filas.filter(function (f) { return !/despachado/i.test(f.cells[4].textContent); }).map(function (f) {
+                return {
+                    fila: f,
+                    lote: f.cells[0].textContent.trim(),
+                    alimento: f.cells[1].textContent.trim().slice(0, 40),
+                    stock_kg: parseInt(f.cells[4].textContent.replace(/[^\d]/g, ''), 10) || 0,
+                    dias: diasParaVencer(f.cells[6].textContent)
+                };
+            });
+        }
+
+        function loteFIFO() {
+            let mejor = null;
+            lotesPendientes().forEach(function (l) { if (!mejor || l.dias <= mejor.dias) mejor = l; });
+            return mejor;
+        }
+
+        function datosKallpa() {
+            return { lotes: lotesPendientes().slice(0, 8).map(function (l) {
+                return { lote: l.lote, alimento: l.alimento, stock_kg: l.stock_kg, dias: l.dias === 9999 ? null : l.dias };
+            }) };
+        }
+
+        function datosAura() {
+            const d = leerPadron();
+            return { ciclo: d.ciclo, entregas: d.registros.length, bloqueos: d.bloqueos || 0,
+                     capacidad_pct: parseInt(document.getElementById('valCapacidad').innerText, 10) || 0 };
+        }
+
+        function textoLocalKallpa() {
+            const l = loteFIFO();
+            return l ? msg('kallpaLocal', l.lote, l.dias === 9999 ? '—' : l.dias) : msg('kallpaSinLotes');
+        }
+
+        function textoLocalAura() {
+            const d = datosAura();
+            return msg('auraLocal', d.ciclo, d.entregas, d.bloqueos);
+        }
+
+        async function llamarAgente(agente, datos) {
+            const ctrl = new AbortController();
+            const espera = setTimeout(function () { ctrl.abort(); }, 6000);
+            try {
+                const r = await fetch('/api/agentes/' + agente, {
+                    method: 'POST', headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(datos), signal: ctrl.signal
+                });
+                if (!r.ok) throw new Error('estado ' + r.status);
+                const j = await r.json();
+                return String(j.texto || '').slice(0, 400);
+            } finally { clearTimeout(espera); }
+        }
+
+        async function consultarAgentes() {
+            const id = ++consultaId;
+            const k = document.getElementById('kallpaIA'), a = document.getElementById('auraIA');
+            const d = datosAura();
+            k.textContent = textoLocalKallpa();
+            a.textContent = msg('localRevisa', d.ciclo, d.entregas, d.bloqueos);
+            if (contingenciaForzada) { pintarBadge(); return; }
+            // Turno 1: KALLPA propone. Turno 2: AURA revisa esa propuesta.
+            let propuesta = null, revision = null;
+            try { propuesta = await llamarAgente('kallpa', datosKallpa()); } catch (e) {}
+            if (id !== consultaId) return;
+            if (propuesta) k.textContent = msg('iaK', propuesta);
+            try {
+                const da = datosAura();
+                da.propuesta = propuesta || textoLocalKallpa();
+                revision = await llamarAgente('aura', da);
+            } catch (e) {}
+            if (id !== consultaId) return;
+            if (revision) a.textContent = msg('iaRevisa', revision);
+            nubeActiva = Boolean(propuesta || revision);
+            agregarMesa(k.textContent, 'var(--accent-blue)');
+            agregarMesa(a.textContent, 'var(--accent-purple)');
+            pintarBadge();
+        }
+
+        function agregarMesa(texto, color) {
+            const log = document.getElementById('mesaLog');
+            const p = document.createElement('p');
+            p.style.margin = '3px 0';
+            p.style.color = color || 'var(--text-main)';
+            p.textContent = texto;
+            log.appendChild(p);
+            while (log.children.length > 10) log.removeChild(log.firstChild);
+            log.scrollTop = log.scrollHeight;
+        }
+
+        function redactar(texto) {
+            return String(texto).replace(/\d[\d.\-\s]{5,}[\dkK]/g, '[oculto]');
+        }
+
+        async function preguntarAgente() {
+            const campo = document.getElementById('preguntaAgente');
+            const destino = document.getElementById('agenteDestino').value;
+            const pregunta = redactar(campo.value).trim().slice(0, 200);
+            if (!pregunta) return;
+            campo.value = '';
+            const nombre = destino.toUpperCase();
+            agregarMesa(msg('operador', nombre, pregunta), 'var(--text-main)');
+            const datos = destino === 'kallpa' ? datosKallpa() : datosAura();
+            datos.pregunta = pregunta;
+            const color = destino === 'kallpa' ? 'var(--accent-blue)' : 'var(--accent-purple)';
+            let respuesta = null;
+            if (!contingenciaForzada) {
+                try { respuesta = await llamarAgente(destino, datos); nubeActiva = true; } catch (e) { nubeActiva = false; }
+                pintarBadge();
+            }
+            if (respuesta) agregarMesa(msg(destino === 'kallpa' ? 'iaK' : 'iaA', respuesta), color);
+            else agregarMesa((destino === 'kallpa' ? textoLocalKallpa() : textoLocalAura()) + ' ' + msg('sinConversacion'), color);
+        }
+
+        function programarConsultaAgentes() {
+            clearTimeout(temporizadorAgentes);
+            temporizadorAgentes = setTimeout(consultarAgentes, 800);
+        }
+
+        cargarPadron();
+        pintarSdd();
+        pintarBadge();
+        consultarAgentes();
+    </script>
+
+</body></html>
