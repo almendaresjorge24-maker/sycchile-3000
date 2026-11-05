@@ -35,3 +35,5 @@ El servicio de los agentes está en `agentes/` (las claves van en `.env`, que no
 - Revisar el tratamiento de datos personales con un abogado (Ley 21.719).
 
 © 2026 Jorge Almendares Aros. Todos los derechos reservados (ver `LICENSE.txt`).
+
+Demo: https://almendaresjorge24-maker.github.io/sycchile-3000/
